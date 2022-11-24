@@ -1,19 +1,28 @@
-﻿using Application.Common;
+﻿using Application.Clients.Commands;
+using Application.Clients.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers;
 
 public class ClientController : ApiController
 {
-    private readonly IApplicationDbContext _applicationDbContext;
-    public ClientController(IApplicationDbContext applicationDbContext)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> Get(int id)
     {
-        _applicationDbContext = applicationDbContext;
+        var vm = await Mediator.Send(new GetClient { });
+
+        return Ok(await Mediator.Send(vm));
     }
 
-    [HttpGet]
-    public IActionResult Index()
+    [HttpGet("login")]
+    public async Task<IActionResult> Login(LoginCommand command)
     {
-        return Ok(_applicationDbContext.Client.ToList().First());
+        return Ok(await Mediator.Send(command));
+    }
+
+    [HttpGet("logout")]
+    public async Task<IActionResult> Logout(LogoutCommand command)
+    {
+        return Ok(await Mediator.Send(command));
     }
 }

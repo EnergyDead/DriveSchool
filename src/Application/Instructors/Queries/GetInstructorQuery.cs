@@ -24,7 +24,9 @@ public class GetInstructorQueryHandler : IRequestHandler<GetInstructorQuery, Ins
 
     public async Task<InstructorDto> Handle(GetInstructorQuery request, CancellationToken cancellationToken)
     {
-        return new InstructorDto { Id = request.Id };
-        return await _context.Instructor.Where(x => x.Id == request.Id).ProjectTo<InstructorDto>(_mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken: cancellationToken);
+        return await _context.Instructor
+            .Where(x => x.Id == request.Id)
+            .ProjectTo<InstructorDto>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
     }
 }

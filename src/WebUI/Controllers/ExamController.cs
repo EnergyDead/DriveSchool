@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Clients.Commands;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers;
 
 public class ExamController : ApiController
 {
     [HttpGet]
-    public IActionResult Index()
+    public async Task<IActionResult> EndureExam()
     {
         return Ok();
     }

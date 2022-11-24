@@ -5,7 +5,7 @@ namespace WebUI.Controllers;
 public class DrivingSchoolReviewController : ApiController
 {
     [HttpGet]
-    public IActionResult Index()
+    public async Task<IActionResult> Get()
     {
         return Ok();
     }
